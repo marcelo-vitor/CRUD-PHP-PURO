@@ -70,7 +70,7 @@ abstract class Model
         $res = $sql->execute();
 
         if ($res) {
-            $_SESSION['sucesso'] = get_class(new static) . " cadastrado com sucesso!";
+            $_SESSION['sucesso'] = get_class(new static) . " atualizado com sucesso!";
             return self::find($dados['id']);
         }
 

@@ -18,6 +18,7 @@ function hasFlash($key)
 
 function setOld()
 {
+    unset($_SESSION['old']);
     foreach ($_POST as $key => $old) {
         $_SESSION['old'][$key] = $old;
     }

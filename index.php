@@ -14,10 +14,12 @@ require 'app/Database/Connection.php';
 
 // CONTROLLER
 require 'app/Controller/AlunoController.php';
+require 'app/Controller/CursoController.php';
 
 // MODEL
 require 'app/Models/Model.php';
 require 'app/Models/Aluno.php';
+require 'app/Models/Curso.php';
 
 // LAYOUT MASTER
 require 'app/Pages/app.php';

@@ -22,6 +22,26 @@ function routes()
             "name" => 'show',
             'url' => 'show',
             "action" => 'AlunoController:show'
+        ],
+        [
+            "name" => "curso.index",
+            "url" => "curso",
+            "action" => 'CursoController:index'
+        ],
+        [
+            "name" => "curso.create",
+            "url" => "curso/create",
+            "action" => 'CursoController:create'
+        ],
+        [
+            "name" => 'curso.update',
+            'url' => 'curso/update',
+            "action" => 'CursoController:update'
+        ],
+        [
+            "name" => 'curso.show',
+            'url' => 'curso/show',
+            "action" => 'CursoController:show'
         ]
     ];
 }

@@ -17,8 +17,10 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center">
                 <ul class="nav justify-content-center">
-                    <li><a href="/davos-tech" class="nav-link px-2 <?= !$_GET ? 'text-white' : 'text-secondary' ?>">Início</a></li>
-                    <li><a href="/davos-tech/create" class="nav-link px-2 <?= $_GET ? ($_GET['url'] == 'create' ? 'text-white' : 'text-secondary') : 'text-secondary' ?>">Cadastrar</a></li>
+                    <li><a href="/davos-tech" class="nav-link px-2 <?= !$_GET ? 'text-white' : 'text-secondary' ?>">Lista alunos</a></li>
+                    <li><a href="/davos-tech/create" class="nav-link px-2 <?= $_GET ? ($_GET['url'] == 'create' ? 'text-white' : 'text-secondary') : 'text-secondary' ?>">Cadastrar aluno</a></li>
+                    <li><a href="/davos-tech/curso" class="nav-link px-2 <?= $_GET ? ($_GET['url'] == 'curso' ? 'text-white' : 'text-secondary') : 'text-secondary' ?>">Listar curso</a></li>
+                    <li><a href="/davos-tech/curso/create" class="nav-link px-2 <?= $_GET ? ($_GET['url'] == 'curso/create' ? 'text-white' : 'text-secondary') : 'text-secondary' ?>">Cadastrar curso</a></li>
                 </ul>
             </div>
         </div>
