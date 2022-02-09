@@ -1,32 +1,27 @@
 <?php
 
-function pathPages()
-{
-    return "app/Pages";
-}
-
 function routes()
 {
     return [
         [
             "name" => "index",
             "url" => "",
-            "view" => "/Aluno/index"
+            "action" => 'AlunoController:index'
         ],
         [
             "name" => "create",
             "url" => "create",
-            "view" => "/Aluno/create"
+            "action" => 'AlunoController:create'
         ],
         [
             "name" => 'update',
             'url' => 'update',
-            "view" => '/Aluno/update'
+            "action" => 'AlunoController:update'
         ],
         [
             "name" => 'show',
             'url' => 'show',
-            "view" => '/Aluno/show'
+            "action" => 'AlunoController:show'
         ]
     ];
 }
@@ -37,7 +32,9 @@ function routerView($get)
 
     foreach (routes() as $route) {
         if ($route['url'] == $currentRoute) {
-            require_once pathPages() . $route['view'] . '.php';
+            $controller = explode(':', $route['action'])[0];
+            $method = explode(':', $route['action'])[1];
+            call_user_func(array(new $controller, $method));
             return;
         }
     }

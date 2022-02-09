@@ -1,5 +1,3 @@
-<?php require_once 'app/Controller/indexController.php'; ?>
-
 <h1>Lista de alunos</h1>
 
 <?php if (hasFlash('sucesso')) : ?>
@@ -23,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach (Aluno::all() as $aluno) : ?>
+        <?php foreach ($alunos as $aluno) : ?>
             <tr>
                 <th><?= $aluno->id ?></th>
                 <td><?= $aluno->email ?></td>

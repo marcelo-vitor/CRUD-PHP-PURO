@@ -45,4 +45,14 @@ class Validate
             flash($name, "Este campo aceita no mínimo " . $length);
         }
     }
+
+    public function validate()
+    {
+        if ($this->error) {
+            setOld();
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -1,5 +1,3 @@
-<?php require_once 'app/Controller/createController.php' ?>
-
 <h1>Cadastro de Aluno</h1>
 
 <?php if (hasFlash('sucesso')) : ?>

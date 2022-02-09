@@ -1,5 +1,3 @@
-<?php require_once 'app/Controller/updateController.php'; ?>
-
 <h1>Atualizar de Aluno</h1>
 
 <?php if (hasFlash('sucesso')) : ?>

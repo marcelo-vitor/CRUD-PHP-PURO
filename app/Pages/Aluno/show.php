@@ -1,5 +1,3 @@
-<?php require_once 'app/Controller/showController.php' ?>
-
 <h1>Dados:</h1>
 
 <hr>
