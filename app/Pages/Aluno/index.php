@@ -15,6 +15,7 @@
             <th scope="col">Valor Mensal</th>
             <th scope="col">Situação</th>
             <th scope="col">Observacao</th>
+            <th scope="col">Curso</th>
             <th scope="col">Ver</th>
             <th scope="col">Editar</th>
             <th scope="col">Excluir</th>
@@ -29,6 +30,7 @@
                 <td>R$ <?= money($aluno->valor_mensalidade) ?></td>
                 <td><?= $aluno->situacao ?></td>
                 <td><?= $aluno->observacao ?></td>
+                <td><?= $aluno->curso()->nome ?></td>
                 <td>
                     <a href="<?= route('show', "?id=" . $aluno->id) ?>" class="btn btn-secondary">Ver</a>
                 </td>

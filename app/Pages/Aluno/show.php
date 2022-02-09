@@ -8,4 +8,5 @@
     <p>Valor Mensal: <b>R$ <?= money($aluno->valor_mensalidade) ?></b></p>
     <p>Situação: <b><?= $aluno->situacao ?></b></p>
     <p>Observação: <b><?= $aluno->observacao ?></b></p>
+    <p>Curso: <b><?= $aluno->curso()->nome ?></b></p>
 </div>

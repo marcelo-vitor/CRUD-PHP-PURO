@@ -10,6 +10,12 @@ class Aluno extends Model
         'telefone',
         'valor_mensalidade',
         'situacao',
-        'observacao'
+        'observacao',
+        'curso_id'
     ];
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class, 'curso_id', 'id');
+    }
 }

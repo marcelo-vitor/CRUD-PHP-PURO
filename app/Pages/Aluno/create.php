@@ -28,6 +28,18 @@
                 <?= flash('senha') ?>
             </div>
         </div>
+        <div class="col">
+            <label for="Curso" class="form-label">Curso:</label>
+            <select class="form-control <?= hasFlash('curso_id') ? 'is-invalid' : '' ?>" id="curso_id" name="curso_id">
+                <option value="">Escolha um curso</option>
+                <?php foreach ($cursos as $curso) : ?>
+                    <option value="<?= $curso->id ?>"><?= $curso->nome ?></option>
+                <?php endforeach; ?>
+            </select>
+            <div class="invalid-feedback">
+                <?= flash('curso_id') ?>
+            </div>
+        </div>
     </div>
     <div class="row mb-3">
         <div class="col">

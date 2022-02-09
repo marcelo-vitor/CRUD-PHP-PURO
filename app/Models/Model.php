@@ -141,4 +141,40 @@ abstract class Model
 
         return rtrim($attrs, ',');
     }
+
+    public function belongsTo($class, $localKey, $foreignKey)
+    {
+        $con = Connection::getConn();
+        $sql = $con->prepare("SELECT * FROM " . (new $class)->table . " where " . $foreignKey . " = " . $this->$localKey);
+        $sql->execute();
+
+        $result = $sql->fetchObject($class);
+
+        return $result;
+    }
+
+    public function hasOne($class, $foreignKey, $onwerKey)
+    {
+        $con = Connection::getConn();
+        $sql = $con->prepare("SELECT * FROM " . (new $class)->table . " where " . $onwerKey . " = " . $this->$foreignKey);
+        $sql->execute();
+
+        $result = $sql->fetchObject($class);
+
+        return $result;
+    }
+
+    public function hasMany($class, $foreignKey, $onwerKey)
+    {
+        $con = Connection::getConn();
+        $sql = $con->prepare("SELECT * FROM " . (new $class)->table . " where " . $onwerKey . " = " . $this->$foreignKey);
+        $sql->execute();
+
+        $result = [];
+        while ($row = $sql->fetchObject($class)) {
+            $result[] = $row;
+        }
+
+        return $result;
+    }
 }

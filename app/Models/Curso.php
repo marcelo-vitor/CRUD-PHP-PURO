@@ -7,4 +7,9 @@ class Curso extends Model
     protected $attributes = [
         'nome'
     ];
+
+    public function alunos()
+    {
+        return $this->hasMany(Aluno::class, 'id', 'curso_id');
+    }
 }

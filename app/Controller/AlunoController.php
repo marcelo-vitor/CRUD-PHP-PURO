@@ -36,12 +36,18 @@ class AlunoController
 
             $validate->required('observacao');
 
+            $validate->required('curso_id');
+
             if ($validate->validate()) {
                 Aluno::create($_POST);
             }
         }
 
-        return view('Aluno/create');
+        $cursos = Curso::all();
+
+        return view('Aluno/create', [
+            'cursos' => $cursos
+        ]);
     }
 
     public function update()
@@ -64,6 +70,8 @@ class AlunoController
 
             $validate->required('observacao');
 
+            $validate->required('curso_id');
+
             if ($validate->validate()) {
                 $result = Aluno::update($_POST);
             }
@@ -71,8 +79,11 @@ class AlunoController
 
         $aluno = Aluno::find($_GET['id']);
 
+        $cursos = Curso::all();
+
         return view('Aluno/update', [
-            'aluno' => $aluno
+            'aluno' => $aluno,
+            'cursos' => $cursos
         ]);
     }
 
