@@ -36,5 +36,10 @@
                 </td>
             </tr>
         <?php endforeach; ?>
+        <?php if (count($cursos) == 0) : ?>
+            <tr>
+                <td colspan="10" class="text-center">Nenhum curso cadastrado!</td>
+            </tr>
+        <?php endif; ?>
     </tbody>
 </table>

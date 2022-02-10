@@ -48,7 +48,7 @@ class Validate
 
     public function email($name)
     {
-        if (filter_var($name, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($_POST[$name], FILTER_VALIDATE_EMAIL)) {
             return true;
         }
 

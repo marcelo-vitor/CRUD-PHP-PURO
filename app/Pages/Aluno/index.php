@@ -46,5 +46,10 @@
                 </td>
             </tr>
         <?php endforeach; ?>
+        <?php if (count($alunos) == 0) : ?>
+            <tr>
+                <td colspan="10" class="text-center">Nenhum aluno cadastrado!</td>
+            </tr>
+        <?php endif; ?>
     </tbody>
 </table>

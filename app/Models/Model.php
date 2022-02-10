@@ -142,6 +142,8 @@ abstract class Model
         return rtrim($attrs, ',');
     }
 
+    // relacionamentos
+
     public function belongsTo($class, $localKey, $foreignKey)
     {
         $con = Connection::getConn();
