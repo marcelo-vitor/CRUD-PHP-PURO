@@ -46,6 +46,16 @@ class Validate
         }
     }
 
+    public function email($name)
+    {
+        if (filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        }
+
+        $this->error = true;
+        flash($name, "Informe um email válido!");
+    }
+
     public function validate()
     {
         if ($this->error) {

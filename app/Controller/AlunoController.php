@@ -24,6 +24,7 @@ class AlunoController
             $validate = new Validate();
 
             $validate->required('email');
+            $validate->email('email');
 
             $validate->max('senha', 10, 'string');
             $validate->min('senha', 6, 'string');
@@ -58,6 +59,7 @@ class AlunoController
             $validate = new Validate();
 
             $validate->required('email');
+            $validate->email('email');
 
             $validate->max('senha', 10, 'string');
             $validate->min('senha', 6, 'string');
