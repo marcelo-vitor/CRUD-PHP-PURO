@@ -4,12 +4,6 @@ class AlunoController
 {
     public function index()
     {
-        if (count($_POST) != 0) {
-            if ($_POST['flag'] == 'delete') {
-                Aluno::delete($_POST['id']);
-            }
-        }
-
         $alunos = Aluno::all();
 
         return view('Aluno/index', [
@@ -17,7 +11,27 @@ class AlunoController
         ]);
     }
 
+    public function delete()
+    {
+        if (count($_POST) != 0) {
+            if ($_POST['flag'] == 'delete') {
+                Aluno::delete($_POST['id']);
+            }
+        }
+
+        return redirect('index');
+    }
+
     public function create()
+    {
+        $cursos = Curso::all();
+
+        return view('Aluno/create', [
+            'cursos' => $cursos
+        ]);
+    }
+
+    public function store()
     {
         if (count($_POST) != 0) {
 
@@ -41,19 +55,28 @@ class AlunoController
 
             if ($validate->validate()) {
                 Aluno::create($_POST);
+            } else {
+                setOld();
             }
         }
 
-        $cursos = Curso::all();
-
-        return view('Aluno/create', [
-            'cursos' => $cursos
-        ]);
+        return redirect('create');
     }
 
     public function update()
     {
+        $aluno = Aluno::find($_GET['id']);
 
+        $cursos = Curso::all();
+
+        return view('Aluno/update', [
+            'aluno' => $aluno,
+            'cursos' => $cursos
+        ]);
+    }
+
+    public function edit()
+    {
         if (count($_POST) != 0) {
 
             $validate = new Validate();
@@ -75,18 +98,13 @@ class AlunoController
             $validate->required('curso_id');
 
             if ($validate->validate()) {
-                $result = Aluno::update($_POST);
+                Aluno::update($_POST);
+            } else {
+                setOld();
             }
         }
 
-        $aluno = Aluno::find($_GET['id']);
-
-        $cursos = Curso::all();
-
-        return view('Aluno/update', [
-            'aluno' => $aluno,
-            'cursos' => $cursos
-        ]);
+        return redirect('update', '?id=' . $_POST['id']);
     }
 
     public function show()

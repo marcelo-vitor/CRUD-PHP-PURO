@@ -28,7 +28,7 @@
                     <a href="<?= route('curso.update', "?id=" . $curso->id) ?>" class="btn btn-primary">Editar</a>
                 </td>
                 <td>
-                    <form action="<?= route('curso.index'); ?>" method="post">
+                    <form action="<?= route('curso.delete'); ?>" method="post">
                         <input type="hidden" name="flag" value="delete">
                         <input type="hidden" name="id" value="<?= $curso->id ?>">
                         <input type="submit" value="Excluir" class="btn btn-danger">

@@ -59,7 +59,6 @@ class Validate
     public function validate()
     {
         if ($this->error) {
-            setOld();
             return false;
         }
 

@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<form class="mt-4" action="<?= route('curso.create') ?>" method="POST">
+<form class="mt-4" action="<?= route('curso.store') ?>" method="POST">
     <div class="row mb-3">
         <div class="col-3">
             <label for="nome" class="form-label">Nome:</label>

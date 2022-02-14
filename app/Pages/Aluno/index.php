@@ -38,7 +38,7 @@
                     <a href="<?= route('update', "?id=" . $aluno->id) ?>" class="btn btn-primary">Editar</a>
                 </td>
                 <td>
-                    <form action="<?= route('index'); ?>" method="post">
+                    <form action="<?= route('delete'); ?>" method="post">
                         <input type="hidden" name="flag" value="delete">
                         <input type="hidden" name="id" value="<?= $aluno->id ?>">
                         <input type="submit" value="Excluir" class="btn btn-danger">

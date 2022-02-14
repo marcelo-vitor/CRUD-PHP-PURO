@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<form class="mt-4" action="<?= route('create') ?>" method="POST">
+<form class="mt-4" action="<?= route('store') ?>" method="POST">
     <div class="row mb-3">
         <div class="col">
             <label for="email" class="form-label">Email:</label>

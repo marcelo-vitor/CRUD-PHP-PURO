@@ -4,12 +4,6 @@ class CursoController
 {
     public function index()
     {
-        if (count($_POST) != 0) {
-            if ($_POST['flag'] == 'delete') {
-                Curso::delete($_POST['id']);
-            }
-        }
-
         $cursos = Curso::all();
 
         return view('Curso/index', [
@@ -17,7 +11,23 @@ class CursoController
         ]);
     }
 
+    public function delete()
+    {
+        if (count($_POST) != 0) {
+            if ($_POST['flag'] == 'delete') {
+                Curso::delete($_POST['id']);
+            }
+        }
+
+        return redirect('curso.index');
+    }
+
     public function create()
+    {
+        return view('Curso/create');
+    }
+
+    public function store()
     {
         if (count($_POST) != 0) {
 
@@ -29,15 +39,26 @@ class CursoController
 
             if ($validate->validate()) {
                 Curso::create($_POST);
+            } else {
+                setOld();
             }
         }
 
-        return view('Curso/create');
+        return redirect('curso.create');
     }
 
     public function update()
     {
 
+        $curso = Curso::find($_GET['id']);
+
+        return view('Curso/update', [
+            'curso' => $curso
+        ]);
+    }
+
+    public function edit()
+    {
         if (count($_POST) != 0) {
 
             $validate = new Validate();
@@ -48,14 +69,12 @@ class CursoController
 
             if ($validate->validate()) {
                 Curso::update($_POST);
+            } else {
+                setOld();
             }
         }
 
-        $curso = Curso::find($_GET['id']);
-
-        return view('Curso/update', [
-            'curso' => $curso
-        ]);
+        return redirect('curso.update', "?id=" . $_POST['id']);
     }
 
     public function show()
