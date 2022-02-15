@@ -209,7 +209,8 @@ abstract class Model
         }
 
         if (empty($attrsAll['id'])) {
-            self::create($attrsAll, array_keys($attrsAll));
+            $novo = self::create($attrsAll, array_keys($attrsAll));
+            $this->id = $novo->id;
         } else {
             self::update($attrsAll, array_keys($attrsAll));
         }
