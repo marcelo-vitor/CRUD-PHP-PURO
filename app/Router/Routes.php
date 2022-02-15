@@ -10,7 +10,7 @@ function routes()
         ],
         [
             "name" => "delete",
-            "url" => "delete",
+            "url" => "delete/{id}",
             "action" => 'AlunoController:delete'
         ],
         [
@@ -25,17 +25,17 @@ function routes()
         ],
         [
             "name" => 'update',
-            'url' => 'update',
+            'url' => 'update/{id}',
             "action" => 'AlunoController:update'
         ],
         [
             "name" => 'edit',
-            'url' => 'edit',
+            'url' => 'edit/{id}',
             "action" => 'AlunoController:edit'
         ],
         [
             "name" => 'show',
-            'url' => 'show',
+            'url' => 'show/{id}',
             "action" => 'AlunoController:show'
         ],
         [
@@ -45,7 +45,7 @@ function routes()
         ],
         [
             "name" => "curso.delete",
-            "url" => "curso/delete",
+            "url" => "curso/delete/{id}",
             "action" => 'CursoController:delete'
         ],
         [
@@ -60,17 +60,17 @@ function routes()
         ],
         [
             "name" => 'curso.update',
-            'url' => 'curso/update',
+            'url' => 'curso/update/{id}',
             "action" => 'CursoController:update'
         ],
         [
             "name" => 'curso.edit',
-            'url' => 'curso/edit',
+            'url' => 'curso/edit/{id}',
             "action" => 'CursoController:edit'
         ],
         [
             "name" => 'curso.show',
-            'url' => 'curso/show',
+            'url' => 'curso/show/{id}',
             "action" => 'CursoController:show'
         ]
     ];

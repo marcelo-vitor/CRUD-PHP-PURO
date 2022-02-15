@@ -32,13 +32,13 @@
                 <td><?= $aluno->observacao ?></td>
                 <td><?= $aluno->curso()->nome ?></td>
                 <td>
-                    <a href="<?= route('show', "?id=" . $aluno->id) ?>" class="btn btn-secondary">Ver</a>
+                    <a href="<?= route('show', ['id' => $aluno->id]) ?>" class="btn btn-secondary">Ver</a>
                 </td>
                 <td>
-                    <a href="<?= route('update', "?id=" . $aluno->id) ?>" class="btn btn-primary">Editar</a>
+                    <a href="<?= route('update', ['id' => $aluno->id]) ?>" class="btn btn-primary">Editar</a>
                 </td>
                 <td>
-                    <form action="<?= route('delete'); ?>" method="post">
+                    <form action="<?= route('delete', ['id' => $aluno->id]); ?>" method="post">
                         <input type="hidden" name="flag" value="delete">
                         <input type="hidden" name="id" value="<?= $aluno->id ?>">
                         <input type="submit" value="Excluir" class="btn btn-danger">

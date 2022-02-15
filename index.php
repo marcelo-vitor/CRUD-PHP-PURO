@@ -26,3 +26,5 @@ require 'app/Models/Curso.php';
 
 // LAYOUT MASTER
 require 'app/Pages/app.php';
+
+//require './test.php';

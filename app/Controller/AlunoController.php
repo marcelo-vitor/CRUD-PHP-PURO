@@ -13,10 +13,8 @@ class AlunoController
 
     public function delete()
     {
-        if (count($_POST) != 0) {
-            if ($_POST['flag'] == 'delete') {
-                Aluno::delete($_POST['id']);
-            }
+        if ($_POST['flag'] == 'delete') {
+            Aluno::delete($_POST['id']);
         }
 
         return redirect('index');
@@ -33,39 +31,38 @@ class AlunoController
 
     public function store()
     {
-        if (count($_POST) != 0) {
 
-            $validate = new Validate();
+        $validate = new Validate();
 
-            $validate->required('email');
-            $validate->email('email');
+        $validate->required('email');
+        $validate->email('email');
 
-            $validate->max('senha', 10, 'string');
-            $validate->min('senha', 6, 'string');
-            $validate->required('senha');
+        $validate->max('senha', 10, 'string');
+        $validate->min('senha', 6, 'string');
+        $validate->required('senha');
 
-            $validate->required('telefone');
+        $validate->required('telefone');
 
-            $validate->max('valor_mensalidade', 2000);
-            $validate->required('valor_mensalidade');
+        $validate->max('valor_mensalidade', 2000);
+        $validate->required('valor_mensalidade');
 
-            $validate->required('observacao');
+        $validate->required('observacao');
 
-            $validate->required('curso_id');
+        $validate->required('curso_id');
 
-            if ($validate->validate()) {
-                Aluno::create($_POST);
-            } else {
-                setOld();
-            }
+        if ($validate->validate()) {
+            Aluno::create($_POST);
+        } else {
+            setOld();
         }
+
 
         return redirect('create');
     }
 
-    public function update()
+    public function update($params)
     {
-        $aluno = Aluno::find($_GET['id']);
+        $aluno = Aluno::find($params['id']);
 
         $cursos = Curso::all();
 
@@ -75,41 +72,40 @@ class AlunoController
         ]);
     }
 
-    public function edit()
+    public function edit($params)
     {
-        if (count($_POST) != 0) {
 
-            $validate = new Validate();
+        $validate = new Validate();
 
-            $validate->required('email');
-            $validate->email('email');
+        $validate->required('email');
+        $validate->email('email');
 
-            $validate->max('senha', 10, 'string');
-            $validate->min('senha', 6, 'string');
-            $validate->required('senha');
+        $validate->max('senha', 10, 'string');
+        $validate->min('senha', 6, 'string');
+        $validate->required('senha');
 
-            $validate->required('telefone');
+        $validate->required('telefone');
 
-            $validate->max('valor_mensalidade', 2000);
-            $validate->required('valor_mensalidade');
+        $validate->max('valor_mensalidade', 2000);
+        $validate->required('valor_mensalidade');
 
-            $validate->required('observacao');
+        $validate->required('observacao');
 
-            $validate->required('curso_id');
+        $validate->required('curso_id');
 
-            if ($validate->validate()) {
-                Aluno::update($_POST);
-            } else {
-                setOld();
-            }
+        if ($validate->validate()) {
+            Aluno::update($_POST);
+        } else {
+            setOld();
         }
 
-        return redirect('update', '?id=' . $_POST['id']);
+
+        return redirect('update', ['id' => $params['id']]);
     }
 
-    public function show()
+    public function show($params)
     {
-        $aluno = Aluno::find($_GET['id']);
+        $aluno = Aluno::find($params['id']);
 
         return view('Aluno/show', [
             'aluno' => $aluno

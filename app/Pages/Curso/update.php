@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<form class="mt-4" action="<?= route('curso.edit', '?id=' . $curso->id) ?>" method="POST">
+<form class="mt-4" action="<?= route('curso.edit', ["id" => $curso->id]) ?>" method="POST">
     <input type="hidden" name="id" value="<?= $curso->id ?>">
     <div class="row mb-3">
         <div class="col-3">

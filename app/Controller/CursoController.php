@@ -11,13 +11,11 @@ class CursoController
         ]);
     }
 
-    public function delete()
+    public function delete($params)
     {
-        if (count($_POST) != 0) {
-            if ($_POST['flag'] == 'delete') {
-                Curso::delete($_POST['id']);
-            }
-        }
+
+        Curso::delete($params['id']);
+
 
         return redirect('curso.index');
     }
@@ -29,57 +27,54 @@ class CursoController
 
     public function store()
     {
-        if (count($_POST) != 0) {
+        $validate = new Validate();
 
-            $validate = new Validate();
+        $validate->max('nome', 15, 'string');
+        $validate->min('nome', 6, 'string');
+        $validate->required('nome');
 
-            $validate->max('nome', 15, 'string');
-            $validate->min('nome', 6, 'string');
-            $validate->required('nome');
-
-            if ($validate->validate()) {
-                Curso::create($_POST);
-            } else {
-                setOld();
-            }
+        if ($validate->validate()) {
+            Curso::create($_POST);
+        } else {
+            setOld();
         }
+
 
         return redirect('curso.create');
     }
 
-    public function update()
+    public function update($params)
     {
 
-        $curso = Curso::find($_GET['id']);
+        $curso = Curso::find($params['id']);
 
         return view('Curso/update', [
             'curso' => $curso
         ]);
     }
 
-    public function edit()
+    public function edit($params)
     {
-        if (count($_POST) != 0) {
 
-            $validate = new Validate();
+        $validate = new Validate();
 
-            $validate->max('nome', 15, 'string');
-            $validate->min('nome', 6, 'string');
-            $validate->required('nome');
+        $validate->max('nome', 15, 'string');
+        $validate->min('nome', 6, 'string');
+        $validate->required('nome');
 
-            if ($validate->validate()) {
-                Curso::update($_POST);
-            } else {
-                setOld();
-            }
+        if ($validate->validate()) {
+            Curso::update($_POST);
+        } else {
+            setOld();
         }
 
-        return redirect('curso.update', "?id=" . $_POST['id']);
+
+        return redirect('curso.update', ['id' => $params['id']]);
     }
 
-    public function show()
+    public function show($params)
     {
-        $curso = Curso::find($_GET['id']);
+        $curso = Curso::find($params['id']);
 
         return view('Curso/show', [
             'curso' => $curso

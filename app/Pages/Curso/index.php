@@ -22,13 +22,13 @@
                 <th><?= $curso->id ?></th>
                 <th><?= $curso->nome ?></th>
                 <td>
-                    <a href="<?= route('curso.show', "?id=" . $curso->id) ?>" class="btn btn-secondary">Ver</a>
+                    <a href="<?= route('curso.show', ['id' => $curso->id]) ?>" class="btn btn-secondary">Ver</a>
                 </td>
                 <td>
-                    <a href="<?= route('curso.update', "?id=" . $curso->id) ?>" class="btn btn-primary">Editar</a>
+                    <a href="<?= route('curso.update', ['id' => $curso->id]) ?>" class="btn btn-primary">Editar</a>
                 </td>
                 <td>
-                    <form action="<?= route('curso.delete'); ?>" method="post">
+                    <form action="<?= route('curso.delete', ['id' => $curso->id]); ?>" method="post">
                         <input type="hidden" name="flag" value="delete">
                         <input type="hidden" name="id" value="<?= $curso->id ?>">
                         <input type="submit" value="Excluir" class="btn btn-danger">
