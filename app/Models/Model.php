@@ -37,12 +37,12 @@ abstract class Model
         return $resultado;
     }
 
-    public static function create($dados)
+    public static function create($dados, $columns = null)
     {
         $con = Connection::getConn();
 
-        $attrs = self::getAttrs();
-        $binds = self::getBinds();
+        $attrs = self::getAttrs($columns);
+        $binds = self::getBinds($columns);
 
         $sql = $con->prepare(
             'INSERT INTO ' . (new static)->table . " ( $attrs ) VALUES ( $binds )"
@@ -60,11 +60,11 @@ abstract class Model
         return [];
     }
 
-    public static function update($dados)
+    public static function update($dados, $columns = null)
     {
         $con = Connection::getConn();
 
-        $sql = "UPDATE " . (new static)->table . " SET " . self::getAttrsBinds() . " WHERE id = :id";
+        $sql = "UPDATE " . (new static)->table . " SET " . self::getAttrsBinds($columns) . " WHERE id = :id";
         $sql = $con->prepare($sql);
         $sql = self::bindValues($sql, $dados);
         $res = $sql->execute();
@@ -95,7 +95,7 @@ abstract class Model
         return true;
     }
 
-    public static function bindValues($prepare, $values)
+    private static function bindValues($prepare, $values)
     {
 
         foreach ($values as $key => $value) {
@@ -106,9 +106,9 @@ abstract class Model
         return $prepare;
     }
 
-    public static function getAttrsBinds()
+    private static function getAttrsBinds($columns = null)
     {
-        $attributes = (new static)->attributes;
+        $attributes = $columns ?? (new static)->attributes;
         $attrsBinds = '';
 
         foreach ($attributes as $attribute) {
@@ -118,9 +118,9 @@ abstract class Model
         return rtrim($attrsBinds, ',');
     }
 
-    public static function getAttrs()
+    private static function getAttrs($columns = null)
     {
-        $attributes = (new static)->attributes;
+        $attributes = $columns ?? (new static)->attributes;
         $attrs = '';
 
         foreach ($attributes as $attribute) {
@@ -130,9 +130,9 @@ abstract class Model
         return rtrim($attrs, ',');
     }
 
-    public static function getBinds()
+    private static function getBinds($columns = null)
     {
-        $attributes = (new static)->attributes;
+        $attributes = $columns ?? (new static)->attributes;
         $attrs = '';
 
         foreach ($attributes as $attribute) {
@@ -140,6 +140,21 @@ abstract class Model
         }
 
         return rtrim($attrs, ',');
+    }
+
+    public static function getColumns()
+    {
+        $con = Connection::getConn();
+        $sql = $con->prepare('show columns from ' . (new static)->table);
+        $sql->execute();
+
+        $res = [];
+
+        while ($row = $sql->fetch()) {
+            $res[$row['Field']] = true;
+        }
+
+        return $res;
     }
 
     // relacionamentos
@@ -178,5 +193,36 @@ abstract class Model
         }
 
         return $result;
+    }
+
+    // metodos
+
+    public function save()
+    {
+        $columns = self::getColumns();
+        $attrsAll = $this->getAllAttrs();
+
+        foreach ($attrsAll as $key => $value) {
+            if (!array_key_exists($key, $columns)) {
+                unset($attrsAll[$key]);
+            }
+        }
+
+        if (empty($attrsAll['id'])) {
+            self::create($attrsAll, array_keys($attrsAll));
+        } else {
+            self::update($attrsAll, array_keys($attrsAll));
+        }
+    }
+
+    private function getAllAttrs()
+    {
+        $array = [];
+
+        foreach ($this as $key => $value) {
+            $array[$key] = $value;
+        }
+
+        return $array;
     }
 }
