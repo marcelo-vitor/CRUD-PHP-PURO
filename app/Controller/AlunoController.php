@@ -62,9 +62,13 @@ class AlunoController
 
     public function update($params)
     {
+        $cursos = Curso::all();
         $aluno = Aluno::find($params['id']);
 
-        $cursos = Curso::all();
+        if (!$aluno) {
+            echo "Aluno não encontrado";
+            return;
+        }
 
         return view('Aluno/update', [
             'aluno' => $aluno,
@@ -106,6 +110,11 @@ class AlunoController
     public function show($params)
     {
         $aluno = Aluno::find($params['id']);
+
+        if (!$aluno) {
+            echo "Aluno não encontrado";
+            return;
+        }
 
         return view('Aluno/show', [
             'aluno' => $aluno

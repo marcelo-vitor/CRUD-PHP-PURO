@@ -48,6 +48,11 @@ class CursoController
 
         $curso = Curso::find($params['id']);
 
+        if (!$curso) {
+            echo "Curso não encontrado";
+            return;
+        }
+
         return view('Curso/update', [
             'curso' => $curso
         ]);
@@ -75,6 +80,11 @@ class CursoController
     public function show($params)
     {
         $curso = Curso::find($params['id']);
+
+        if (!$curso) {
+            echo "Curso não encontrado";
+            return;
+        }
 
         return view('Curso/show', [
             'curso' => $curso
