@@ -2,7 +2,7 @@
 
 class AlunoController
 {
-    public function index()
+    public function index($request)
     {
         $alunos = Aluno::all();
 
@@ -11,16 +11,16 @@ class AlunoController
         ]);
     }
 
-    public function delete()
+    public function delete($request, $id)
     {
-        if ($_POST['flag'] == 'delete') {
-            Aluno::delete($_POST['id']);
+        if ($request->flag == 'delete') {
+            Aluno::delete($id);
         }
 
         return redirect('index');
     }
 
-    public function create()
+    public function create($request)
     {
         $cursos = Curso::all();
 
@@ -29,7 +29,7 @@ class AlunoController
         ]);
     }
 
-    public function store()
+    public function store($request)
     {
 
         $validate = new Validate();
@@ -51,7 +51,7 @@ class AlunoController
         $validate->required('curso_id');
 
         if ($validate->validate()) {
-            Aluno::create($_POST);
+            Aluno::create($request->all());
         } else {
             setOld();
         }
@@ -60,10 +60,10 @@ class AlunoController
         return redirect('create');
     }
 
-    public function update($params)
+    public function update($request, $id)
     {
         $cursos = Curso::all();
-        $aluno = Aluno::find($params['id']);
+        $aluno = Aluno::find($id);
 
         if (!$aluno) {
             echo "Aluno não encontrado";
@@ -76,9 +76,8 @@ class AlunoController
         ]);
     }
 
-    public function edit($params)
+    public function edit($request, $id)
     {
-
         $validate = new Validate();
 
         $validate->required('email');
@@ -98,18 +97,18 @@ class AlunoController
         $validate->required('curso_id');
 
         if ($validate->validate()) {
-            Aluno::update($_POST);
+            Aluno::update($request->all());
         } else {
             setOld();
         }
 
 
-        return redirect('update', ['id' => $params['id']]);
+        return redirect('update', ['id' => $id]);
     }
 
-    public function show($params)
+    public function show($request, $id)
     {
-        $aluno = Aluno::find($params['id']);
+        $aluno = Aluno::find($id);
 
         if (!$aluno) {
             echo "Aluno não encontrado";

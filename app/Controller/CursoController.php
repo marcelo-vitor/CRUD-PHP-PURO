@@ -2,7 +2,7 @@
 
 class CursoController
 {
-    public function index()
+    public function index($request)
     {
         $cursos = Curso::all();
 
@@ -11,11 +11,9 @@ class CursoController
         ]);
     }
 
-    public function delete($params)
+    public function delete($request, $id)
     {
-
-        Curso::delete($params['id']);
-
+        Curso::delete($id);
 
         return redirect('curso.index');
     }
@@ -25,7 +23,7 @@ class CursoController
         return view('Curso/create');
     }
 
-    public function store()
+    public function store($request)
     {
         $validate = new Validate();
 
@@ -34,7 +32,7 @@ class CursoController
         $validate->required('nome');
 
         if ($validate->validate()) {
-            Curso::create($_POST);
+            Curso::create($request->all());
         } else {
             setOld();
         }
@@ -43,10 +41,9 @@ class CursoController
         return redirect('curso.create');
     }
 
-    public function update($params)
+    public function update($request, $id)
     {
-
-        $curso = Curso::find($params['id']);
+        $curso = Curso::find($id);
 
         if (!$curso) {
             echo "Curso não encontrado";
@@ -58,9 +55,8 @@ class CursoController
         ]);
     }
 
-    public function edit($params)
+    public function edit($request, $id)
     {
-
         $validate = new Validate();
 
         $validate->max('nome', 15, 'string');
@@ -68,18 +64,18 @@ class CursoController
         $validate->required('nome');
 
         if ($validate->validate()) {
-            Curso::update($_POST);
+            Curso::update($request->all());
         } else {
             setOld();
         }
 
 
-        return redirect('curso.update', ['id' => $params['id']]);
+        return redirect('curso.update', ['id' => $id]);
     }
 
-    public function show($params)
+    public function show($request, $id)
     {
-        $curso = Curso::find($params['id']);
+        $curso = Curso::find($id);
 
         if (!$curso) {
             echo "Curso não encontrado";

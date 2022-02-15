@@ -7,6 +7,7 @@ require 'app/Router/Routes.php';
 require 'app/Router/Router.php';
 
 // Utils
+require 'app/Utils/Request.php';
 require 'app/Utils/Flash.php';
 require 'app/Utils/Validate.php';
 require 'app/Utils/Convert.php';

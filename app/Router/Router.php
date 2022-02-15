@@ -38,7 +38,7 @@ function routerView($get)
     if ($rota) {
         $controller = explode(':', $rota['action'])[0];
         $method = explode(':', $rota['action'])[1];
-        call_user_func(array(new $controller, $method), $params);
+        call_user_func_array(array(new $controller, $method), array_merge(['request' => new Request], $params));
         return;
     } else {
         echo "Está rota não está definida!";
